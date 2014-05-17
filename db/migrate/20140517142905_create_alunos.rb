@@ -38,9 +38,7 @@ class CreateAlunos < ActiveRecord::Migration
       t.column :nu_nota_comp3, :float
       t.column :nu_nota_comp4, :float
       t.column :nu_nota_comp5, :float
-      t.column :nu_nota_redaca, :float
-
-      t.timestamps
+      t.column :nu_nota_redacao, :float
     end
   end
 end
