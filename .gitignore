@@ -22,7 +22,6 @@ capybara-*.html
 /tmp/*
 /db/*.sqlite3
 /public/system/*
-/app/assets/stylesheets/*.css
 /coverage/
 /spec/tmp/*
 **.orig
