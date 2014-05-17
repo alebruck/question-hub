@@ -8,7 +8,7 @@ development:
   database: enem
   host: localhost
   username: postgres
-  password: postgres
+  password:
 
 
 # Warning: The database defined as "test" will be erased and
@@ -19,7 +19,6 @@ test:
   database: enem
   host: localhost
   username: postgres
-  password: postgres
   password:
 
 production:
@@ -27,4 +26,4 @@ production:
   database: enem
   host: localhost
   username: postgres
-  password: postgres
+  password:
