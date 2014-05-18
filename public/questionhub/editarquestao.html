@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head><title> </title></head>
+<body>
+<form action=" ">
+	<select id="listaQuestoes">
+	</select>
+</form>
+<form action="novaquestao.php" method="POST">
+<label>Id da Questao:<input type="text" id="idquestao" name="idquestao"/></label><br/>
+<label>Prova:<select id="idprova" name="idprova"></select></label><br/>
+<label>Area:<select id="idarea" name="idarea"></select></label><br/>
+<label>Disciplinas:
+<div id="disciplinas"></div>
+</label>
+
+<label>Numero da questao (azul):<input type="text" id="azul" name="azul"></label><br/>
+<label>Numero da questao (amarelo):<input type="text" id="amarelo" name="amarelo"></label><br/>
+<label>Numero da questao (branco):<input type="text" id="branco" name="branco"></label><br/>
+<label>Numero da questao (rosa):<input type="text" id="rosa" name="rosa"></label><br/>
+<label>Numero da questao (cinza):<input type="text" id="cinza" name="cinza"></label><br/>
+<label>Imagem Alternativa:<input type="text" id="img" name="img"></label><br/>
+<label>Imagem simples:<input type="text" id="img2" name="img2"></label><br/>
+<label>Enunciado:<br/><textarea id="enunciado" name="enunciado" cols="80" rows="4"></textarea></label><br/>
+<label>a:<br/><textarea id="a" name="a" cols="80" rows="4"></textarea></label><br/>
+<label>b:<br/><textarea id="b" name="b" cols="80" rows="4"></textarea></label><br/>
+<label>c:<br/><textarea id="c" name="c" cols="80" rows="4"></textarea></label><br/>
+<label>d:<br/><textarea id="d" name="d" cols="80" rows="4"></textarea></label><br/>
+<label>e:<br/><textarea id="e" name="e" cols="80" rows="4"></textarea></label><br/>
+<label>Imagem a:<br/><textarea id="imga" name="imga" cols="80" rows="4"></textarea></label><br/>
+<label>Imagem b:<br/><textarea id="imgb" name="imgb" cols="80" rows="4"></textarea></label><br/>
+<label>Imagem c:<br/><textarea id="imgc" name="imgc" cols="80" rows="4"></textarea></label><br/>
+<label>Imagem d:<br/><textarea id="imgd" name="imgd" cols="80" rows="4"></textarea></label><br/>
+<label>Imagem e:<br/><textarea id="imge" name="imge" cols="80" rows="4"></textarea></label><br/>
+
+<label>Correta:
+<select id="correta" name="correta">
+<option value="a">a</option>
+<option value="b">b</option>
+<option value="c">c</option>
+<option value="d">d</option>
+<option value="e">e</option>
+</select></label><br/>
+
+</label><br/>
+<input type="submit" value="Inserir" id="bt"/>
+</form>
+<script type="text/javascript">
+var questaoSelecionada = null;
+var todasQuestoes = null;
+
+var listarProvas = function (provas) {
+	var listaProvas = document.getElementById("idprova");
+	listaProvas.innerHTML = "";
+	for(var i=0;i<provas.length;i++) {
+		var item=document.createElement("option");
+		item.setAttribute("value", provas[i].id);
+		console.log(provas[i].id, questaoSelecionada.idprova);
+		if(provas[i].id==questaoSelecionada.idprova) {
+			item.setAttribute("selected","selected");
+		}
+		item.innerHTML = provas[i].nome + " - " +provas[i].ano;
+		listaProvas.appendChild(item);
+	}
+}
+
+var listarAreas = function (areas) {
+	var listaAreas = document.getElementById("idarea");
+	listaAreas.innerHTML = "";
+	for(var i=0;i<areas.length;i++) {
+		var item=document.createElement("option");
+		item.setAttribute("value", areas[i].id);
+		if(areas[i].id==questaoSelecionada.idarea) {
+			item.setAttribute("selected","selected");
+		}
+		item.innerHTML = areas[i].nome;
+		listaAreas.appendChild(item);
+	}
+}
+var listarDisciplinas = function (disciplinas) {
+	var listaDisciplinas = document.getElementById("disciplinas");
+	listaDisciplinas.innerHTML = "";
+	for(var i=0;i<disciplinas.length;i++) {
+		var item=document.createElement("input");
+		item.setAttribute("id","check_"+disciplinas[i].nome);
+		item.setAttribute("name","checkbox_disciplinas[]");
+		item.setAttribute("type","checkbox");
+		item.setAttribute("value", disciplinas[i].id);
+		for(var j=0;j<questaoSelecionada.disciplinas.length;j++) {
+			if(questaoSelecionada.disciplinas[j].iddisciplina==disciplinas[i].id) {
+				item.setAttribute("checked", "checked");
+			}
+		}
+		
+		var item2=document.createElement("label");
+		item2.setAttribute("for","check_"+disciplinas[i].nome);
+		var explicacao=document.createTextNode(disciplinas[i].nome);
+		item2.appendChild(explicacao);								
+		item2.appendChild(document.createElement("br"));
+		listaDisciplinas.appendChild(item);
+		listaDisciplinas.appendChild(item2);
+		
+	}
+
+}
+var carregar = function () {
+	var script = document.createElement("script");
+	script.setAttribute("type","text/javascript");
+	script.setAttribute("src","provas.php?callback=listarProvas");
+	var body = document.getElementsByTagName("body")[0];
+	body.appendChild(script);
+	var script2 = document.createElement("script");
+	script2.setAttribute("type","text/javascript");
+	script2.setAttribute("src","disciplinas.php?callback=listarDisciplinas");
+	body.appendChild(script2);
+	var script3 = document.createElement("script");
+	script3.setAttribute("type","text/javascript");
+	script3.setAttribute("src","areas.php?callback=listarAreas");
+	body.appendChild(script3);
+	
+	document.getElementById("idquestao").value = questaoSelecionada.id;
+	document.getElementById("azul").value = questaoSelecionada.azul;
+	document.getElementById("amarelo").value = questaoSelecionada.amarelo;
+	document.getElementById("branco").value = questaoSelecionada.branco;
+	document.getElementById("rosa").value = questaoSelecionada.rosa;
+	document.getElementById("cinza").value = questaoSelecionada.cinza;
+	
+	
+	
+	document.getElementById("img").value = questaoSelecionada.img;
+	document.getElementById("img2").value = questaoSelecionada.img2;
+	document.getElementById("enunciado").value = questaoSelecionada.enunciado;
+	document.getElementById("a").value = questaoSelecionada.a;
+	document.getElementById("imga").value = questaoSelecionada.imga;
+	document.getElementById("b").value = questaoSelecionada.b;
+	document.getElementById("imgb").value = questaoSelecionada.imgb;
+	document.getElementById("c").value = questaoSelecionada.c;
+	document.getElementById("imgc").value = questaoSelecionada.imgc;
+	document.getElementById("d").value = questaoSelecionada.d;
+	document.getElementById("imgd").value = questaoSelecionada.imgd;
+	document.getElementById("e").value = questaoSelecionada.e;
+	document.getElementById("imge").value = questaoSelecionada.imge;
+	document.getElementById("correta").selectedIndex = questaoSelecionada.correta.charCodeAt(0)-97;
+	
+}
+//window.setTimeout(carregar,500);
+var escolherQuestao = function () {
+	var listaQuestoes = document.getElementById("listaQuestoes");
+	questaoSelecionada = todasQuestoes[listaQuestoes.selectedIndex];
+	carregar();
+}
+
+var listarQuestoes = function (questoes) {
+	var listaQuestoes = document.getElementById("listaQuestoes");
+	listaQuestoes.innerHTML = "";
+	for(var i=0;i<questoes.length;i++) {
+		var item=document.createElement("option");
+		item.setAttribute("value", questoes[i].id);
+		item.innerHTML = "Questao "+questoes[i].azul+": "+questoes[i].enunciado.substr(0, 10)+"...";
+		listaQuestoes.appendChild(item);
+	}
+	todasQuestoes = questoes;
+	questaoSelecionada = questoes[0];
+	window.setTimeout(carregar,500);
+	listaQuestoes.onchange = escolherQuestao;
+}
+
+
+
+var carregarQuestoes = function () {
+	var script = document.createElement("script");
+	script.setAttribute("type","text/javascript");
+	script.setAttribute("src","questoes.php?callback=listarQuestoes");
+	var body = document.getElementsByTagName("body")[0];
+	body.appendChild(script);
+}
+carregarQuestoes();
+</script>
+</body>
+</html>
