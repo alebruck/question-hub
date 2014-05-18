@@ -1,62 +1,86 @@
 
-<section id="view-escola">
-  <div class="container">
-    <h1><%= @escola.nome %></h1>
-    <div class="row">
-      <div class="col-md-2">
-        Nome:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.nome %>
-      </div>
-        <div class="col-md-2">
-        Email:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.email %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        Endereço:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.endereco %>
-      </div>
-        <div class="col-md-2">
-        CEP:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.cep %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        Cidade:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.cidade %>
-      </div>
+<div id="view-escola">
+  <section class="header">
+    <div class="row info-escola">
+      <div class="col-md-4 col-md-offset-7">
+        <h1><%= @escola.nome.titleize %></h1>
+        <div class="row">
           <div class="col-md-2">
-        Estado:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.estado %>
+            Endereço:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.endereco.titleize %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            CEP:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.cep %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Cidade:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.cidade.titleize %>
+          </div>
+        </div>
+        <div class="row">
+              <div class="col-md-2">
+            Estado:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.estado.titleize %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Bairro:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.bairro.titleize %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            Telefone:
+          </div>
+          <div class="col-md-1">
+            <%= @escola.telefone %>
+          </div>
+        </div>
+        <% if @escola.email.present? %>
+        <div class="row">
+          <div class="col-md-2">
+            Email:
+          </div>
+          <div class="col-md-10">
+            <%= @escola.email %>
+          </div>
+        </div>
+        <% end %>
       </div>
     </div>
+  </section>
+  <section id="home" class="timeline-base">
+    <div class="container">
       <div class="row">
-      <div class="col-md-2">
-        Bairro:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.bairro %>
-      </div>
-          <div class="col-md-2">
-        Telefone:
-      </div>
-      <div class="col-md-2">
-        <%= @escola.telefone %>
+          <ul class="timeline">
+              <li>
+                <h3 class="timeline-breaker">2012</h3>
+                <ul>
+                  <% @escola.eventos.each do |evento| %>
+                    <li class="timeline-item <%= cycle("highlight", "right") -%>">
+                      <%= render :partial => 'home/event', :locals => {:evento => evento, :escola => @escola } %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+          </ul>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>

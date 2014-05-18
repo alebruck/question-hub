@@ -4,6 +4,8 @@ QuestionHub::Application.routes.draw do
 
   resources :escolas, :only => [:show]
 
+  resources :prova, :only => [:show]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
