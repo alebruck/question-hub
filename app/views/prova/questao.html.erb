@@ -1,24 +1,53 @@
-<section id="search">
+<section id="resposta">
   <div class="container">
 
+    <div class='row row-resposta'>
+      <h3>Enunciado</h3>
+      <div class='col-lg-8'>
+        <p id="enunciado"></p>
+        <div class='row'>
+          <h3>Alternativas</h3>
+          <ul>
+            <li>
+              <strong>A)</strong> <span id="a"></span>
+            </li>
+            <li>
+              <strong>B)</strong> <span id="b"></span>
+            </li>
+            <li>
+              <strong>C)</strong> <span id="c"></span>
+            </li>
+            <li>
+              <strong>D)</strong> <span id="d"></span>
+            </li>
+            <li>
+              <strong>E)</strong> <span id="e"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class='col-lg-4'>
+        <div id="img2" class='img-responsive'></div>
+      </div>
+    </div>
 
-<div id="img2"></div>
-<div id="divQuestoes"></div>
-<pre id="enunciado"></pre>
-A)<pre id="a"></pre>
-B)<pre id="b"></pre>
-C)<pre id="c"></pre>
-D)<pre id="d"></pre>
-E)<pre id="e"></pre>
-Resposta correta: <span id="correta"></span><br/>
-Tag: #<span id="tag"></span><br/>
-Palavras-chave: <span id="keywords"></span>
-<hr/>
-<h2>Wikipedia</h2>
-<ul id="wikipedia"></ul>
-<h2>YouTube</h2>
-<span id="youtube"></span>
 
+    <div class='row row-resposta'>
+      <strong>Resposta Correta</strong> <span id="correta"></span><br/>
+      <strong>Tag:</strong> #<span id="tag"></span><br/>
+      <strong>Palavras-chave:</strong> <span id="keywords"></span>
+    </div>
+
+    <div class='row row-resposta'>
+      <h3>Wikipedia</h3>
+      <ul id="wikipedia"></ul>
+    </div>
+
+
+    <div class='row row-resposta'>
+      <h3>YouTube</h3>
+      <span id="youtube"></span>
+    </div>
 
 
   </div>
@@ -86,10 +115,16 @@ var exibirVideosYouTube2 = function (json) {
   for(var i=0;i<json.data.items.length && i<10;i++) {
     var link  = document.createElement("a");
     link.setAttribute("href", "http://www.youtube.com/watch?v="+json.data.items[i].id);
+    link.setAttribute("class", "thumbnail");
+    link.setAttribute("target", "_blank");
     var img = document.createElement("img");
     img.setAttribute("src",json.data.items[i].thumbnail.hqDefault);
+    img.setAttribute("class",'img-responsive');
     link.appendChild(img);
-    youtube.appendChild(link);
+    var div = document.createElement("div");
+    div.setAttribute("class",'col-lg-3 col-md-3 col-sx-6 col-sm-6');
+    div.appendChild(link);
+    youtube.appendChild(div);
   }
 }
 var exibirVideosYouTube = function (keywords) {

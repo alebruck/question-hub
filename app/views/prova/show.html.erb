@@ -1,14 +1,64 @@
 <section id="search">
   <div class="container">
-    <h3 style="padding:10px 0px;"><%= tipo_descricao(params[:id]) %>  <%= link_to("Visualizar prova original", "/perguntas/questoesarea.html?idarea=#{params[:id]}", :class => 'btn btn-default')%></h3 style="padding:10px;">
-    <% @questoes_ids.each_with_index do |questao, i| %>
+    <h3 style="padding:10px 0px;"><%= tipo_descricao(params[:id]) %>  <%= link_to("Visualizar prova original", "/perguntas/questoesarea.html?idarea=#{params[:id]}", :class => 'btn btn-default', :target => '_blank')%></h3 style="padding:10px;">
 
-      <div class="result">
-        <p>
-          <span class='firstcharacter'><%= i+1 %></span>
-          <a href="/prova/<%= questao[:id] %>/questao"><%= questao[:enunciado] %></a><br/>
-        </p>
-      </div>
-    <% end %>
+
+    <div id="divQuestoes"></div>
   </div>
 </section>
+
+
+
+
+<script type="text/javascript">
+var getUrlVars = function()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+    hash[1] = unescape(hash[1]);
+    vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+
+    return vars;
+}
+
+var listarQuestoesArea = function (questoes) {
+  var divQuestoes = document.getElementById("divQuestoes");
+  for(var i=0;i<questoes.length;i++) {
+
+
+    var a = document.createElement("a");
+    a.setAttribute("href","/prova/"+questoes[i].id+"/questao");
+    a.appendChild(document.createTextNode(questoes[i].enunciado));
+
+    var span = document.createElement("span");
+    span.setAttribute("class","firstcharacter");
+    span.appendChild(document.createTextNode(i+1));
+
+    var p = document.createElement("p");
+    p.appendChild(span);
+    p.appendChild(a);
+
+    var div = document.createElement("div");
+    div.setAttribute("class","result");
+    div.appendChild(p)
+
+    divQuestoes.appendChild(div);
+  }
+}
+
+var carregarQuestoesArea = function () {
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+  var get = getUrlVars();
+  script.setAttribute("src","http://ec2-54-207-247-209.sa-east-1.compute.amazonaws.com/perguntas/questoesarea.php?callback=listarQuestoesArea&idarea=<%= params[:id]%>");
+  var body = document.getElementsByTagName("body")[0];
+  body.appendChild(script);
+}
+carregarQuestoesArea();
+</script>
