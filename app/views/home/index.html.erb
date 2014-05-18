@@ -1,2 +1,20 @@
-<section id="home">
+<section id="home" class="timeline-base">
+  <div class="container">
+    <div class="row">
+        <ul class="timeline">
+          <% @escolas.each do |escola| %>
+            <li>
+              <h3 class="timeline-breaker"><%= link_to(escola.nome.titleize, '#') %></h3>
+              <ul>
+                <% escola.eventos.each do |evento| %>
+                  <li class="timeline-item <%= cycle("highlight", "right") -%>">
+                    <%= render :partial => 'home/event', :locals => {:evento => evento, :escola => escola } %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
 </section>
