@@ -1,23 +1,64 @@
 <!DOCTYPE html>
-<head>
-  <title>
-    Question HUB
-  </title>
+  <head>
+    <title>
+      Question HUB
+    </title>
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700' rel='stylesheet' type='text/css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body>
-
-  <%= yield %>
-
-</body>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="menu-item"><a title="HOME" href="/">HOME</a></li>
+            <li class="menu-item"><a title="HOME" href="/">SOBRE</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section id="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="home">
+            <h1>Quer melhorar o futuro de sua escola?</h1>
+            <h2>Veja o que ela está fazendo hoje!</h2>
+            <form role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-2">
+                    <input type="text" class="form-control input-lg" id="escola" placeholder="Busque sua escola...">
+                  </div>
+                  <div class="col-md-2">
+                    <button type="button" class="btn btn-success btn-lg btn-block">Buscar</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div></div>
+        </div>
+      </div>
+    </section>
+    <%= yield %>
+    <footer>
+    </footer>
+  </body>
 </html>
