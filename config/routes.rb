@@ -2,6 +2,7 @@ QuestionHub::Application.routes.draw do
 
   get "home/index"
 
+  match '/about' => 'home#about', :as => :about
   resources :escolas, :only => [:show, :index]
 
   resources :prova, :only => [:show] do
