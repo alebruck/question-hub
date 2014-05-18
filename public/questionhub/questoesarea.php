@@ -6,7 +6,7 @@ function my_json_encode($arr)
         return mb_decode_numericentity(json_encode($arr), array (0x80, 0xffff, 0, 0xffff), 'UTF-8');
 
 }
-	echo $_GET["callback"]."(";
+	echo $_GET["callback"];
 	$db = new SQLite3("questionhub.s3db");
 	$idarea = $_GET["idarea"];
 	$query = "select * from questao where idarea=$idarea";
@@ -20,9 +20,8 @@ function my_json_encode($arr)
 			array_push($row["disciplinas"], $row2);
 		}
 		array_push($questoes, $row);
-				
 	}
 	//print_r($questoes);
-	//$questoes["length"] = 
+	//$questoes["length"] =
 	echo my_json_encode($questoes);
 ?>);

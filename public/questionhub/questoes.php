@@ -1,4 +1,4 @@
-<?php 
+<?php
 function json_readable_encode($in, $indent = 0, $from_array = false)
 {
     $_myself = __FUNCTION__;
@@ -57,35 +57,35 @@ function my_json_encode($arr)
 
 }
 
-function utf8json($inArray) { 
+function utf8json($inArray) {
 
-    static $depth = 0; 
+    static $depth = 0;
 
-    /* our return object */ 
-    $newArray = array(); 
+    /* our return object */
+    $newArray = array();
 
-    /* safety recursion limit */ 
-    $depth ++; 
-    if($depth >= '30') { 
-        return false; 
-    } 
+    /* safety recursion limit */
+    $depth ++;
+    if($depth >= '30') {
+        return false;
+    }
 
-    /* step through inArray */ 
-    foreach($inArray as $key=>$val) { 
-        if(is_array($val)) { 
-            /* recurse on array elements */ 
-            $newArray[$key] = utf8json($val); 
-        } else { 
-            /* encode string values */ 
-            $newArray[$key] = utf8_encode($val); 
-        } 
-    } 
+    /* step through inArray */
+    foreach($inArray as $key=>$val) {
+        if(is_array($val)) {
+            /* recurse on array elements */
+            $newArray[$key] = utf8json($val);
+        } else {
+            /* encode string values */
+            $newArray[$key] = utf8_encode($val);
+        }
+    }
 
-    /* return utf8 encoded array */ 
-    return $newArray; 
-} 
+    /* return utf8 encoded array */
+    return $newArray;
+}
 
-	echo $_GET["callback"]."(";
+
 	$db = new SQLite3("questionhub.s3db");
 	$query = "select * from questao";
 	$results = $db->query($query);
@@ -98,9 +98,9 @@ function utf8json($inArray) {
 			array_push($row["disciplinas"], $row2);
 		}
 		array_push($questoes, $row);
-				
+
 	}
 	//print_r($questoes);
-	//$questoes["length"] = 
+	//$questoes["length"] =
 	echo json_encode(utf8json($questoes));
 ?>);
