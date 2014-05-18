@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <title>
-      Question HUB
+      Nosso EXAME
     </title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,35 +30,12 @@
         </div>
         <div class="collapse navbar-collapse navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="menu-item"><a title="HOME" href="/">HOME</a></li>
-            <li class="menu-item"><a title="HOME" href="/">SOBRE</a></li>
+            <li class="menu-item"><a title="NOSSO EXAME" class="brand"  href="/"><div id="nosso">Nosso</div> <div id="exame">EXAME</div><i class="fa fa-check-circle"></i></a></li>
+            <li class="menu-item"><a title="SOBRE" class="about" href="/">SOBRE</a></li>
           </ul>
         </div>
       </div>
     </nav>
-    <section id="banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="home">
-            <h1>Quer melhorar o futuro de sua escola?</h1>
-            <h2>Veja o que ela está fazendo hoje!</h2>
-            <form role="form" action="/escolas">
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-6 col-md-offset-2">
-                    <input type="text" class="form-control input-lg" name="nome" id="escola" placeholder="Busque sua escola...">
-                  </div>
-                  <div class="col-md-2">
-                    <button type="submit" class="btn btn-success btn-lg btn-block">Buscar</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div></div>
-        </div>
-      </div>
-    </section>
     <%= yield %>
     <footer>
     </footer>
