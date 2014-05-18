@@ -2,7 +2,7 @@ QuestionHub::Application.routes.draw do
 
   get "home/index"
 
-  resources :escolas, :only => [:show]
+  resources :escolas, :only => [:show, :index]
 
   resources :prova, :only => [:show]
 

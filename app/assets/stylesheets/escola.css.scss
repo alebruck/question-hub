@@ -34,3 +34,14 @@
     line-height: 30px;
   }
 }
+
+#search {
+  padding: 20px;
+  background: #DBDBDB;
+
+  .result {
+    background-color: white;
+    margin: 8px 0px;
+    padding: 8px;
+  }
+}
