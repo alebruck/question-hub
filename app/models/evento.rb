@@ -9,7 +9,7 @@ class Evento < ActiveRecord::Base
     value = self.escola.send(self.media_aplicada).to_i
     case self.media_aplicada
     when 'media_cien_nat_2012', 'media_cien_hum_2012', 'media_lingua_cod_2012', 'media_matematica_2012', 'media_redacao_2012'
-      return (value/100).to_i
+      return (value/10).to_i
     else
       return value
     end
@@ -17,7 +17,6 @@ class Evento < ActiveRecord::Base
 
 
   def titulo
-
     case self.media_aplicada
       when 'media_cien_nat_2012'
         return 'Média geral da prova de Ciências da Natureza'
@@ -42,7 +41,10 @@ class Evento < ActiveRecord::Base
       else
         nil
     end
+  end
 
+  def origem
+    "#{self.escola.cidade.titleize} / #{self.escola.estado}"
   end
 
 
