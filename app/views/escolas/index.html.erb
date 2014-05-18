@@ -2,9 +2,14 @@
   <div class="container">
     <h3 style="padding:10px 0px;">Busca por: <%= params[:nome] %></h3 style="padding:10px;">
     <% @escolas.each do |escola| %>
-      <div class="result">
-        <a title="HOME" href="/escolas/<%=escola.pk_cod_entidade%>"><%= escola.nome %></a><br/>
-      </div>  
+      <div class="row result">
+        <div class="col-md-8">
+          <a title="HOME" href="/escolas/<%=escola.pk_cod_entidade%>"><%= escola.nome %></a>
+        </div>
+        <div class="col-md-4 text-right">
+          <%= escola.cidade.titleize %> / <%= escola.estado.titleize %>
+        </div>
+      </div>
     <% end %>
     <%= will_paginate @escolas, renderer: BootstrapPagination::Rails %>
   </div>

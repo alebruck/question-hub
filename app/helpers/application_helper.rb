@@ -4,13 +4,13 @@ module ApplicationHelper
   def tipo_descricao(desc)
     case desc.to_i
       when 1
-        return 'Ciências da Natureza'
+        return 'Prova Ciências da Natureza - ENEM 2012'
       when 2
-        return 'Ciências Humanas'
+        return 'Prova Ciências Humanas - ENEM 2012'
       when 3
-        return 'Linguagens e Códigos'
+        return 'Prova Linguagens e Códigos - ENEM 2012'
       when 4
-        return 'Matemática'
+        return 'Prova Matemática - ENEM 2012'
     end
   end
 end
