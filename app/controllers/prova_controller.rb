@@ -14,4 +14,8 @@ class ProvaController < ApplicationController
 
 
   end
+
+  def questao
+  end
+
 end

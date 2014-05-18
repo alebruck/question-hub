@@ -4,7 +4,11 @@ QuestionHub::Application.routes.draw do
 
   resources :escolas, :only => [:show, :index]
 
-  resources :prova, :only => [:show]
+  resources :prova, :only => [:show] do
+    member do
+      get 'questao'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

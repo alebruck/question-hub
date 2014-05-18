@@ -1,0 +1,192 @@
+<section id="search">
+  <div class="container">
+
+
+<div id="img2"></div>
+<div id="divQuestoes"></div>
+<pre id="enunciado"></pre>
+A)<pre id="a"></pre>
+B)<pre id="b"></pre>
+C)<pre id="c"></pre>
+D)<pre id="d"></pre>
+E)<pre id="e"></pre>
+Resposta correta: <span id="correta"></span><br/>
+Tag: #<span id="tag"></span><br/>
+Palavras-chave: <span id="keywords"></span>
+<hr/>
+<h2>Wikipedia</h2>
+<ul id="wikipedia"></ul>
+<h2>YouTube</h2>
+<span id="youtube"></span>
+
+
+
+  </div>
+</section>
+
+
+<script type="text/javascript">
+var getUrlVars = function()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+    hash[1] = unescape(hash[1]);
+    vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+
+    return vars;
+}
+var extrairPalavrasChave = function (txt) {
+  var words = txt.split(" ");
+  var keywords = [];
+  for(var i=1;i<words.length;i++) {
+
+    var word = words[i].trim();
+    if(words[i+1]==undefined) break;
+    if(words[i+2]==undefined) break;
+    var word2 = words[i+1].trim();
+    var word3 = words[i+2].trim();
+    var firstLetter = word.charCodeAt(0);
+    var firstLetter2 = word2.charCodeAt(0);
+    var firstLetter3 = word3.charCodeAt(0);
+    word = word.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    word2 = word2.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    word3 = word3.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    if(firstLetter>=65 && firstLetter<=90 && word.length>3) {
+      var achou = false;
+      for(var j=0;j<keywords.length;j++) {
+        if(word==keywords[j])
+          achou = true;
+      }
+      if(achou==false) {
+        if(firstLetter2>=65 && firstLetter2<=90 && word2.length>3) {
+          if(firstLetter3>=65 && firstLetter3<=90 && word3.length>3) {
+            keywords.push(word+" "+word2+" "+word3);
+            i+=2;
+          }
+          else {
+            keywords.push(word+" "+word2);
+            i+=1;
+          }
+        } else {
+          keywords.push(word);
+        }
+      }
+    }
+  }
+  return keywords;
+}
+var exibirVideosYouTube2 = function (json) {
+  var youtube = document.getElementById("youtube");
+  for(var i=0;i<json.data.items.length && i<10;i++) {
+    var link  = document.createElement("a");
+    link.setAttribute("href", "http://www.youtube.com/watch?v="+json.data.items[i].id);
+    var img = document.createElement("img");
+    img.setAttribute("src",json.data.items[i].thumbnail.hqDefault);
+    link.appendChild(img);
+    youtube.appendChild(link);
+  }
+}
+var exibirVideosYouTube = function (keywords) {
+  var maior = -1;
+  var maiorPalavra = "";
+  for(var i=0;i<keywords.length;i++) {
+    if(keywords[i].length>maior) {
+      maior = keywords[i].length;
+      maiorPalavra = keywords[i];
+    }
+  }
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+
+  if(keywords.length>0) {
+    script.setAttribute("src","http://gdata.youtube.com/feeds/api/videos?v=2&alt=jsonc&q="+maiorPalavra+"&callback=exibirVideosYouTube2");
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(script);
+  }
+}
+
+var exibirVerbetesWikipedia2 = function (json) {
+  console.log(json);
+  var wikipedia = document.getElementById("wikipedia");
+  for(var i=0;i<json.query.search.length;i++) {
+    var item=document.createElement("li");
+    var link=document.createElement("a");
+    link.setAttribute("href","http://pt.wikipedia.org/"+json.query.search[i].title);
+    link.appendChild(document.createTextNode(json.query.search[i].title));
+    var snippet = document.createElement("span");
+    snippet.innerHTML = json.query.search[i].snippet;
+    item.appendChild(link);
+    item.appendChild(document.createTextNode(" - "));
+    item.appendChild(snippet);
+    wikipedia.appendChild(item);
+  }
+}
+
+var exibirVerbetesWikipedia = function (keywords) {
+  var maior = -1;
+  var maiorPalavra = "";
+  for(var i=0;i<keywords.length;i++) {
+    if(keywords[i].length>maior) {
+      maior = keywords[i].length;
+      maiorPalavra = keywords[i];
+    }
+  }
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+  script.setAttribute("src","http://pt.wikipedia.org/w/api.php?action=query&list=search&format=json&callback=exibirVerbetesWikipedia2&srsearch="+maiorPalavra);
+  var body = document.getElementsByTagName("body")[0];
+  body.appendChild(script);
+
+}
+var exibirQuestao = function (questao) {
+  //console.log(questao);
+  var enunciado = document.getElementById("enunciado");
+  enunciado.innerHTML = questao.enunciado;
+  var a = document.getElementById("a");
+  a.innerHTML = questao.a;
+  var b = document.getElementById("b");
+  b.innerHTML = questao.b;
+  var c = document.getElementById("c");
+  c.innerHTML = questao.c;
+  var d = document.getElementById("d");
+  d.innerHTML = questao.d;
+  var e = document.getElementById("e");
+  e.innerHTML = questao.e;
+  var correta = document.getElementById("correta");
+  correta.innerHTML = questao.correta;
+  var img2 = document.getElementById("img2");
+  if(questao.img2.length>0) {
+    var myImg = document.createElement("img");
+    myImg.setAttribute("src","http://ec2-54-207-247-209.sa-east-1.compute.amazonaws.com/perguntas/"+questao.img2);
+    img2.appendChild(myImg);
+  }
+  document.getElementById("tag").innerHTML = "ENEM2012QUESTAO"+questao.azul;
+
+  var keywords = extrairPalavrasChave(questao.enunciado +" " +  questao.a +" " +  questao.b+" " +  questao.c+" " +  questao.d+" " +  questao.e );
+  for(var i=0;i<keywords.length;i++) {
+    if(i!=keywords.length-1)
+      document.getElementById("keywords").innerHTML+=keywords[i] + ", ";
+    else
+      document.getElementById("keywords").innerHTML+=keywords[i] + "";
+  }
+  exibirVideosYouTube(keywords);
+  exibirVerbetesWikipedia(keywords);
+}
+
+
+var carregarQuestao = function () {
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+  var get = getUrlVars();
+  script.setAttribute("src","http://ec2-54-207-247-209.sa-east-1.compute.amazonaws.com/perguntas/questao.php?callback=exibirQuestao&idquestao=<%= params[:id]%>");
+  var body = document.getElementsByTagName("body")[0];
+  body.appendChild(script);
+}
+carregarQuestao();
+</script>

@@ -6,7 +6,7 @@
       <div class="result">
         <p>
           <span class='firstcharacter'><%= i+1 %></span>
-          <a href="/escolas/"><%= questao[:enunciado] %></a><br/>
+          <a href="/prova/<%= questao[:id] %>/questao"><%= questao[:enunciado] %></a><br/>
         </p>
       </div>
     <% end %>
