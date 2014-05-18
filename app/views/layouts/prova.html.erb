@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <head>
+    <title>
+      Question HUB
+    </title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+    <link href='http://rendro.github.io/easy-pie-chart/stylesheets/jquery.easy-pie-chart.css' rel='stylesheet' type='text/css'>
+
+    <%= stylesheet_link_tag "application", :media => "all" %>
+
+    <%= csrf_meta_tags %>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="menu-item"><a title="HOME" href="/">HOME</a></li>
+            <li class="menu-item"><a title="HOME" href="/">SOBRE</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <%= yield %>
+    <footer>
+    </footer>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://rendro.github.io/easy-pie-chart/javascripts/jquery.easy-pie-chart.js"></script>
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        $('.chart').easyPieChart({
+          lineWidth: '6',
+          lineCap: 'square',
+          scaleColor: '#d5d5d5',
+          trackColor: '#eeeeee',
+          barColor: '#0099cc',
+          easing: 'easeOutBounce'
+        });
+      });
+    </script>
+  </body>
+</html>
