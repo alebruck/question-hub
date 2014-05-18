@@ -7,4 +7,6 @@ class Escola < ActiveRecord::Base
                   :media_matematica_2012, :media_redacao_2012, :media_cien_nat_2011, :media_cien_hum_2011, :media_lingua_cod_2011,
                   :media_matematica_2011, :media_redacao_2011, :nome, :rede, :regiao, :nr_endereco, :complemento_endereco,
                   :bairro, :cep, :ddd, :situacao_funcionamento
+
+  has_many :eventos
 end
