@@ -1,3 +1,14 @@
-<h1>Prova#show</h1>
-<p>Find me in app/views/prova/show.html.erb</p>
-<%= @questoes.inspect %>
+<section id="search">
+  <div class="container">
+    <h3 style="padding:10px 0px;"><%= tipo_descricao(params[:id]) %>  <%= link_to("Visualizar prova original", "/perguntas/questoesarea.html?idarea=#{params[:id]}", :class => 'btn btn-default')%></h3 style="padding:10px;">
+    <% @questoes_ids.each_with_index do |questao, i| %>
+
+      <div class="result">
+        <p>
+          <span class='firstcharacter'><%= i+1 %></span>
+          <a href="/escolas/"><%= questao[:enunciado] %></a><br/>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</section>
