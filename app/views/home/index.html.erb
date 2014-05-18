@@ -1,10 +1,33 @@
+<section id="banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="home">
+        <h1>Quer melhorar o futuro de sua escola?</h1>
+        <h2>Veja o que ela está fazendo hoje!</h2>
+        <form role="form" action="/escolas">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-2">
+                <input type="text" class="form-control input-lg" name="nome" id="escola" placeholder="Busque sua escola...">
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div></div>
+    </div>
+  </div>
+</section>
 <section id="home" class="timeline-base">
   <div class="container">
     <div class="row">
         <ul class="timeline">
           <% @escolas.each do |escola| %>
             <li>
-              <h3 class="timeline-breaker"><%= link_to(escola.nome.titleize, '#') %></h3>
+              <h3 class="timeline-breaker"><%= link_to(escola.nome.titleize, escola_path(escola.pk_cod_entidade)) %></h3>
               <ul>
                 <% escola.eventos.each do |evento| %>
                   <li class="timeline-item <%= cycle("highlight", "right") -%>">

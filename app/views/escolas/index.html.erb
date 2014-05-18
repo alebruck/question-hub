@@ -2,12 +2,10 @@
   <div class="container">
     <h3 style="padding:10px 0px;">Busca por: <%= params[:nome] %></h3 style="padding:10px;">
     <% @escolas.each do |escola| %>
-      
-    <div class="result">
-      <a title="HOME" href="/escolas/<%=escola.pk_cod_entidade%>"><%= escola.nome %></a><br/>
-    </div>  
+      <div class="result">
+        <a title="HOME" href="/escolas/<%=escola.pk_cod_entidade%>"><%= escola.nome %></a><br/>
+      </div>  
     <% end %>
-
     <%= will_paginate @escolas, renderer: BootstrapPagination::Rails %>
   </div>
 </section>
