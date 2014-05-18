@@ -9,33 +9,33 @@ function my_json_encode($arr)
 }
 
 
-function utf8json($inArray) { 
+function utf8json($inArray) {
 
-    static $depth = 0; 
+    static $depth = 0;
 
-    /* our return object */ 
-    $newArray = array(); 
+    /* our return object */
+    $newArray = array();
 
-    /* safety recursion limit */ 
-    $depth ++; 
-    if($depth >= '30') { 
-        return false; 
-    } 
+    /* safety recursion limit */
+    $depth ++;
+    if($depth >= '30') {
+        return false;
+    }
 
-    /* step through inArray */ 
-    foreach($inArray as $key=>$val) { 
-        if(is_array($val)) { 
-            /* recurse on array elements */ 
-            $newArray[$key] = utf8json($val); 
-        } else { 
-            /* encode string values */ 
-            $newArray[$key] = utf8_encode($val); 
-        } 
-    } 
+    /* step through inArray */
+    foreach($inArray as $key=>$val) {
+        if(is_array($val)) {
+            /* recurse on array elements */
+            $newArray[$key] = utf8json($val);
+        } else {
+            /* encode string values */
+            $newArray[$key] = utf8_encode($val);
+        }
+    }
 
-    /* return utf8 encoded array */ 
-    return $newArray; 
-} 
+    /* return utf8 encoded array */
+    return $newArray;
+}
 	echo $_GET["callback"]."(";
 	$db = new SQLite3("questionhub.s3db");
 	$idquestao = $_GET["idquestao"];
@@ -51,9 +51,9 @@ function utf8json($inArray) {
 		}
 		echo json_encode(utf8json($row));
 		//array_push($questoes, $row);
-				
+
 	}
 	//print_r($questoes);
-	//$questoes["length"] = 
+	//$questoes["length"] =
 	//echo my_json_encode($questoes);
 ?>);

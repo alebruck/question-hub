@@ -1,4 +1,4 @@
-<?php 
+<?php
 	echo $_GET["callback"]."(";
 	$db = new SQLite3("questionhub.s3db");
 	$query = "select * from disciplina";
