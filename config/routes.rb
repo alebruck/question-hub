@@ -1,5 +1,8 @@
 QuestionHub::Application.routes.draw do
+
   get "home/index"
+
+  resources :escolas, :only => [:show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
