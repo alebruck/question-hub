@@ -32,12 +32,17 @@
           <ul class="nav navbar-nav">
             <li class="menu-item"><a title="NOSSO EXAME" class="brand"  href="/"><div id="nosso">Nosso</div> <div id="exame">EXAME</div><i class="fa fa-check-circle"></i></a></li>
             <li class="menu-item"><a title="SOBRE" class="about" href="/">SOBRE</a></li>
+            <li class="menu-item"><a title="GITHUB" class="github" href="//github.com/alebruck/question-hub"><i class="fa fa-github"></i></a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div id="navbar"></div>
     <%= yield %>
     <footer>
+      <div class="container">
+        <a id="anchor" href="#navbar"><div><i class="fa fa-chevron-up"></i></div><div>Topo</div></a>
+      </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -53,6 +58,16 @@
           barColor: '#0099cc',
           easing: 'easeOutBounce'
         });
+
+        $('#anchor').click(function(){
+          if($(this).attr('href') != "#") {
+          $('html, body').animate({
+          scrollTop: $( $(this).attr('href') ).offset().top-50
+          }, 1000);
+          return false;
+          }
+          return false;
+          });
       });
     </script>
   </body>
